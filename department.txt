@@ -1,0 +1,78 @@
+db.Department.insertMany([
+  {"stud_id": 11, "name": "Siddhi", "Age": 21, "course":["Computer Science", "Maths"], "marks": 85},
+  {"stud_id": 12, "name": "Anisha", "Age": 20, "course":["Java", "C++"], "marks": 75},
+  {"stud_id": 13, "name": "Nameera", "Age": 23, "course":["HTML", "CSS"], "marks": 38},
+  {"stud_id": 14, "name": "Anita", "Age": 21, "course":["Computer Science", "Chemistry"], "marks": 90},
+  {"stud_id": 15, "name": "Yash", "Age": 22, "course":["Science", "Geography"], "marks": 58},
+  {"stud_id": 16, "name": "Eesha", "Age": 21, "course":["Statistics", "Maths"], "marks": 39},
+  {"stud_id": 17, "name": "Rushali", "Age": 20, "course":["Geology", "Geography"], "marks": 37},
+  {"stud_id": 18, "name": "Shreya", "Age": 23, "course":["Computer Science", "Chemistry"], "marks": 84},
+  {"stud_id": 19, "name": "Mansi", "Age": 21, "course":["History", "Civics"], "marks": 67},
+  {"stud_id": 20, "name": "Diya", "Age": 20, "course":["Science", "Maths"], "marks": 56},])
+  
+db.Department.find({marks:{$gt:80}}).count()
+
+db.Department.find({marks:{$lt:40}},{_id:0,name:1,age:1}).sort({age:-1}).limit(5)
+
+
+
+
+db.Hospital.insert([{"HospID":101, "HospName":"ONP Hospital", "Add":"Shivaji Nagar", "Spec":["Orthopedic","Pediatric"]},
+{"HospID":102, "HospName":"Jupiter Hospital", "Add":"Baner", "Spec":["Dentist","Pediatric"]},
+])
+
+db.Doctor.insert([{"DocID":11, "DocName":"Dr.Esha", "Specialist":"Skin", "Visit":{"Monday":["Payris Hospital"], "Tuesday":["ONP Hospital"]}},
+{"DocID":12, "DocName":"Dr.Deepali", "Specialist":"Gynaecology", "Visit":{"Monday":["Jahangir Hospital"], "Tuesday":["Sassoon Hospital"]}},
+])
+
+db.Hospital.find(
+  { Spec: "Pediatric" },
+  { _id: 0, HospName: 1, Add: 1 }
+)
+
+db.Doctor.find(
+  { "Visit.Monday": "Jahangir Hospital" },
+  { DocName: 1, _id: 0 }
+)
+
+
+
+
+db.Book.insert([
+  {"BID":501, "Bname":"BBBB", "Publisher":"Nirali", "Year": 2018, "Writer": "Anjali", "Cost": 300},
+  {"BID":502, "Bname":"MMM", "Publisher":"vision", "Year": 2011, "Writer": "Deepali", "Cost": 235},
+  {"BID":503, "Bname":"NNNN", "Publisher":"Prakashan", "Year": 2015, "Writer": "Esha", "Cost": 1130},
+  ])
+  
+db.Publisher.insert([
+  {"PubID":301, "Name":"Nirali", "Loc":"Pune", "Year":8},  
+  {"PubID":302, "Name":"Vision", "Loc":"Mumbai", "Year":12},  
+  {"PubID":303, "Name":"Orelly", "Loc":"Nagpur", "Year":16},
+  ])  
+  
+db.Publisher.find({"Loc":"Mumbai"},
+{_id:0, Name:1}).pretty() 
+
+db.Book.find({Cost:{$gt:1000}},
+{_id:0,Bname:1,Cost:1}).pretty()
+
+
+
+
+db.Product.insert([{"ProdID": 1041, "ProdName": "Sofa", "Price": 20000},
+{"ProdID": 1042, "ProdName": "Sofa", "Price": 26000},])
+
+db.Order.insert([{"OrderID":101, "Date": "23-12-2022", "CustName": "Anju Sawant", "ProdID": 1042, "Price": 26000, "InvoiceStatus": 1},
+{"OrderID": 102, "Date": "05-03-2023", "CustName": "Ankita Sapkal", "ProdID": 1045, "Price": 15000, "InvoiceStatus": 0},])
+
+db.Invoice.insert([{"OrderID": 101, "CustName": "Anju Sawant", "ProdID": 1042, "Qty": 2, "Total": 54000},
+{"OrderID": 102, "CustName": "Ankita Sapkal", "ProdID": 1045, "Qty": 1, "Total": 15000},])
+
+db.Product.find(
+  {},
+  { _id: 0, ProdName: 1 }
+);
+
+db.Order.find(
+  { Price: { $gt: 10000 } }
+).pretty();
