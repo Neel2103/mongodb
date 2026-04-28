@@ -1,3 +1,4 @@
+//assignment 1
 db.Department.insertMany([
   {"stud_id": 11, "name": "Siddhi", "Age": 21, "course":["Computer Science", "Maths"], "marks": 85},
   {"stud_id": 12, "name": "Anisha", "Age": 20, "course":["Java", "C++"], "marks": 75},
@@ -10,13 +11,18 @@ db.Department.insertMany([
   {"stud_id": 19, "name": "Mansi", "Age": 21, "course":["History", "Civics"], "marks": 67},
   {"stud_id": 20, "name": "Diya", "Age": 20, "course":["Science", "Maths"], "marks": 56},])
   
+//no of students having more than 80%
 db.Department.find({marks:{$gt:80}}).count()
 
+//name and age of students with less than 40 marks
 db.Department.find({marks:{$lt:40}},{_id:0,name:1,age:1}).sort({age:-1}).limit(5)
 
+//students names whose percentage is greater than 70
+db.Department.find({marks:{$gt:70}},{_id:0,name:1}).pretty()
 
 
 
+//assignment 2
 db.Hospital.insert([{"HospID":101, "HospName":"ONP Hospital", "Add":"Shivaji Nagar", "Spec":["Orthopedic","Pediatric"]},
 {"HospID":102, "HospName":"Jupiter Hospital", "Add":"Baner", "Spec":["Dentist","Pediatric"]},
 ])
@@ -37,7 +43,7 @@ db.Doctor.find(
 
 
 
-
+//assignment 3
 db.Book.insert([
   {"BID":501, "Bname":"BBBB", "Publisher":"Nirali", "Year": 2018, "Writer": "Anjali", "Cost": 300},
   {"BID":502, "Bname":"MMM", "Publisher":"vision", "Year": 2011, "Writer": "Deepali", "Cost": 235},
@@ -58,7 +64,7 @@ db.Book.find({Cost:{$gt:1000}},
 
 
 
-
+//assignment 4
 db.Product.insert([{"ProdID": 1041, "ProdName": "Sofa", "Price": 20000},
 {"ProdID": 1042, "ProdName": "Sofa", "Price": 26000},])
 
@@ -68,11 +74,19 @@ db.Order.insert([{"OrderID":101, "Date": "23-12-2022", "CustName": "Anju Sawant"
 db.Invoice.insert([{"OrderID": 101, "CustName": "Anju Sawant", "ProdID": 1042, "Qty": 2, "Total": 54000},
 {"OrderID": 102, "CustName": "Ankita Sapkal", "ProdID": 1045, "Qty": 1, "Total": 15000},])
 
+//list all the products in the inventory
 db.Product.find(
   {},
   { _id: 0, ProdName: 1 }
 );
 
+//list the details of orders with a value greater >10000
 db.Order.find(
   { Price: { $gt: 10000 } }
 ).pretty();
+
+//list all the orders which has not been processed
+db.Order.find({status:"inprocess"}).pretty()
+
+//list all the orders along with their invoice for "Mr.Arun Kumar"
+db.Product.find({CustName:"Arun Kumar",status:"process"}).pretty()
