@@ -31,11 +31,13 @@ db.Doctor.insert([{"DocID":11, "DocName":"Dr.Esha", "Specialist":"Skin", "Visit"
 {"DocID":12, "DocName":"Dr.Deepali", "Specialist":"Gynaecology", "Visit":{"Monday":["Jahangir Hospital"], "Tuesday":["Sassoon Hospital"]}},
 ])
 
+//list the names of hospitals with paediatric specialization
 db.Hospital.find(
   { Spec: "Pediatric" },
   { _id: 0, HospName: 1, Add: 1 }
 )
 
+//list the names of doctors who are visiting "Jahangir Hospital" on Mondays
 db.Doctor.find(
   { "Visit.Monday": "Jahangir Hospital" },
   { DocName: 1, _id: 0 }
@@ -55,10 +57,13 @@ db.Publisher.insert([
   {"PubID":302, "Name":"Vision", "Loc":"Mumbai", "Year":12},  
   {"PubID":303, "Name":"Orelly", "Loc":"Nagpur", "Year":16},
   ])  
-  
+
+
+//list all publishers which are located in Mumbai
 db.Publisher.find({"Loc":"Mumbai"},
 {_id:0, Name:1}).pretty() 
 
+//list the details of books that cost >1000
 db.Book.find({Cost:{$gt:1000}},
 {_id:0,Bname:1,Cost:1}).pretty()
 
